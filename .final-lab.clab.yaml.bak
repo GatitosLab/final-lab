@@ -1,9 +1,9 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/GatitosLab/containerlab/cisco_schemas/schemas/clab.schema.json
-name: red-hospital
+name: red-centro-salud
 
 mgmt:
   network: eth0
-  ipv4-subnet: 10.0.0.0/27
+  ipv4-subnet: 5.0.10.0/27
 
 topology:
   kinds:
@@ -17,12 +17,12 @@ topology:
       type: L2
 
     tpl_linux:
-      kind: linux
-      image: alpine:latest
+      kind: tpl_linux
+      image: nicolaka/netshoot:latest
 
     tpl_alpine_linux:
-      kind: linux
-      image: debian:latest
+      kind: tpl_alpine_linux
+      image: nicolaka/netshoot:latest
 
     tpl_paloalto_panos:
       kind: paloalto_panos
@@ -35,12 +35,14 @@ topology:
   nodes:
     spine1:
       kind: tpl_cisco_basic_router
+      startup-config: configs/router-spine1.partial.conf
       labels:
         graph-posX: "405"
         graph-posY: "535"
         graph-groupLabelPos: bottom-center
     spine2:
       kind: tpl_cisco_basic_router
+      startup-config: configs/router-spine2.partial.conf
       labels:
         graph-posX: "505"
         graph-posY: "535"
@@ -48,24 +50,28 @@ topology:
 
     leaf1:
       kind: tpl_cisco_basic_switch
+      startup-config: configs/switch-leaf1.partial.conf
       labels:
         graph-posX: "325"
         graph-posY: "575"
         graph-groupLabelPos: bottom-center
     leaf2:
       kind: tpl_cisco_basic_switch
+      startup-config: configs/switch-leaf2.partial.conf
       labels:
         graph-posX: "415"
         graph-posY: "595"
         graph-groupLabelPos: bottom-center
     leaf3:
       kind: tpl_cisco_basic_switch
+      startup-config: configs/switch-leaf3.partial.conf
       labels:
         graph-posX: "495"
         graph-posY: "595"
         graph-groupLabelPos: bottom-center
     leaf4:
       kind: tpl_cisco_basic_switch
+      startup-config: configs/switch-leaf4.partial.conf
       labels:
         graph-posX: "565"
         graph-posY: "575"
@@ -73,12 +79,14 @@ topology:
 
     border-leaf1:
       kind: tpl_cisco_basic_switch
+      startup-config: configs/switch-border-leaf1.partial.conf
       labels:
         graph-posX: "405"
         graph-posY: "485"
         graph-groupLabelPos: bottom-center
     border-leaf2:
       kind: tpl_cisco_basic_switch
+      startup-config: configs/switch-border-leaf2.partial.conf
       labels:
         graph-posX: "505"
         graph-posY: "485"
@@ -106,9 +114,9 @@ topology:
       kind: tpl_linux
       network-mode: none
       exec:
-        - ip addr add 10.0.10.10/24 dev eth0
-        - ip link set eth0 up
-        - ip route add default via 10.0.10.1
+        - ip addr add 10.0.10.10/24 dev eth1
+        - ip link set eth1 up
+        - ip route add default via 10.0.10.1 dev eth1
       labels:
         graph-posX: "255"
         graph-posY: "565"
@@ -118,9 +126,9 @@ topology:
       kind: tpl_linux
       network-mode: none
       exec:
-        - ip addr add 10.0.10.20/24 dev eth0
-        - ip link set eth0 up
-        - ip route add default via 10.0.10.1
+        - ip addr add 10.0.10.20/24 dev eth1
+        - ip link set eth1 up
+        - ip route add default via 10.0.10.1 dev eth1
       labels:
         graph-posX: "255"
         graph-posY: "595"
@@ -130,9 +138,9 @@ topology:
       kind: tpl_linux
       network-mode: none
       exec:
-        - ip addr add 10.0.10.30/24 dev eth0
-        - ip link set eth0 up
-        - ip route add default via 10.0.10.1
+        - ip addr add 10.0.10.30/24 dev eth1
+        - ip link set eth1 up
+        - ip route add default via 10.0.10.1 dev eth1
       labels:
         graph-posX: "275"
         graph-posY: "625"
@@ -142,9 +150,9 @@ topology:
       kind: tpl_alpine_linux
       network-mode: none
       exec:
-        - ip addr add 10.0.10.40/24 dev eth0
-        - ip link set eth0 up
-        - ip route add default via 10.0.10.1
+        - ip addr add 10.0.10.40/24 dev eth1
+        - ip link set eth1 up
+        - ip route add default via 10.0.10.1 dev eth1
       labels:
         graph-posX: "375"
         graph-posY: "645"
@@ -154,9 +162,9 @@ topology:
       kind: tpl_alpine_linux
       network-mode: none
       exec:
-        - ip addr add 10.0.20.10/24 dev eth0
-        - ip link set eth0 up
-        - ip route add default via 10.0.20.1
+        - ip addr add 10.0.20.10/24 dev eth1
+        - ip link set eth1 up
+        - ip route add default via 10.0.20.1 dev eth1
       labels:
         graph-posX: "415"
         graph-posY: "655"
@@ -166,9 +174,9 @@ topology:
       kind: tpl_alpine_linux
       network-mode: none
       exec:
-        - ip addr add 10.0.30.10/24 dev eth0
-        - ip link set eth0 up
-        - ip route add default via 10.0.30.1
+        - ip addr add 10.0.30.10/24 dev eth1
+        - ip link set eth1 up
+        - ip route add default via 10.0.30.1 dev eth1
       labels:
         graph-posX: "635"
         graph-posY: "585"
@@ -178,9 +186,9 @@ topology:
       kind: tpl_alpine_linux
       network-mode: none
       exec:
-        - ip addr add 10.0.30.20/24 dev eth0
-        - ip link set eth0 up
-        - ip route add default via 10.0.30.1
+        - ip addr add 10.0.30.20/24 dev eth1
+        - ip link set eth1 up
+        - ip route add default via 10.0.30.1 dev eth1
       labels:
         graph-posX: "595"
         graph-posY: "645"
@@ -190,9 +198,9 @@ topology:
       kind: tpl_alpine_linux
       network-mode: none
       exec:
-        - ip addr add 10.0.30.30/24 dev eth0
-        - ip link set eth0 up
-        - ip route add default via 10.0.30.1
+        - ip addr add 10.0.30.30/24 dev eth1
+        - ip link set eth1 up
+        - ip route add default via 10.0.30.1 dev eth1
       labels:
         graph-posX: "535"
         graph-posY: "645"
@@ -202,9 +210,9 @@ topology:
       kind: tpl_alpine_linux
       network-mode: none
       exec:
-        - ip addr add 10.0.20.20/24 dev eth0
-        - ip link set eth0 up
-        - ip route add default via 10.0.20.1
+        - ip addr add 10.0.20.20/24 dev eth1
+        - ip link set eth1 up
+        - ip route add default via 10.0.20.1 dev eth1
       labels:
         graph-posX: "325"
         graph-posY: "645"
@@ -214,9 +222,9 @@ topology:
       kind: tpl_alpine_linux
       network-mode: none
       exec:
-        - ip addr add 10.0.20.30/24 dev eth0
-        - ip link set eth0 up
-        - ip route add default via 10.0.20.1
+        - ip addr add 10.0.20.30/24 dev eth1
+        - ip link set eth1 up
+        - ip route add default via 10.0.20.1 dev eth1
       labels:
         graph-posX: "445"
         graph-posY: "645"
@@ -226,9 +234,9 @@ topology:
       kind: tpl_alpine_linux
       network-mode: none
       exec:
-        - ip addr add 10.0.20.40/24 dev eth0
-        - ip link set eth0 up
-        - ip route add default via 10.0.20.1
+        - ip addr add 10.0.20.40/24 dev eth1
+        - ip link set eth1 up
+        - ip route add default via 10.0.20.1 dev eth1
       labels:
         graph-posX: "485"
         graph-posY: "645"
@@ -238,9 +246,9 @@ topology:
       kind: tpl_alpine_linux
       network-mode: none
       exec:
-        - ip addr add 10.0.20.50/24 dev eth0
-        - ip link set eth0 up
-        - ip route add default via 10.0.20.1
+        - ip addr add 10.0.20.50/24 dev eth1
+        - ip link set eth1 up
+        - ip route add default via 10.0.20.1 dev eth1
       labels:
         graph-posX: "625"
         graph-posY: "625"
@@ -250,9 +258,9 @@ topology:
       kind: tpl_linux
       network-mode: none
       exec:
-        - ip addr add 10.0.200.10/24 dev eth0
-        - ip link set eth0 up
-        - ip route add default via 10.0.200.1
+        - ip addr add 10.0.200.10/24 dev eth1
+        - ip link set eth1 up
+        - ip route add default via 10.0.200.1 dev eth1
       labels:
         graph-posX: "375"
         graph-posY: "435"
@@ -269,24 +277,24 @@ topology:
     # Spine ←→ Distribution Leafs
     - endpoints: [ "leaf1:Ethernet0/1", "spine1:Ethernet0/1" ]
     - endpoints: [ "leaf1:Ethernet0/2", "spine2:Ethernet0/1" ]
-    - endpoints: [ "leaf1:Ethernet0/3", "web_server_interno:eth0" ]
-    - endpoints: [ "leaf1:Ethernet1/1", "base_datos:eth0" ]
-    - endpoints: [ "leaf1:Ethernet1/2", "dns_dhcp_server:eth0" ]
-    - endpoints: [ "leaf1:Ethernet1/3", "camara1:eth0" ]
+    - endpoints: [ "leaf1:Ethernet0/3", "web_server_interno:eth1" ]
+    - endpoints: [ "leaf1:Ethernet1/1", "base_datos:eth1" ]
+    - endpoints: [ "leaf1:Ethernet1/2", "dns_dhcp_server:eth1" ]
+    - endpoints: [ "leaf1:Ethernet1/3", "camara1:eth1" ]
     - endpoints: [ "leaf2:Ethernet0/1", "spine1:Ethernet0/2" ]
     - endpoints: [ "leaf2:Ethernet0/2", "spine2:Ethernet0/2" ]
-    - endpoints: [ "leaf2:Ethernet0/3", "host_gestion:eth0" ]
-    - endpoints: [ "leaf2:Ethernet1/1", "camara2:eth0" ]
-    - endpoints: [ "leaf2:Ethernet1/2", "host_gestion_camaras:eth0" ]
+    - endpoints: [ "leaf2:Ethernet0/3", "host_gestion:eth1" ]
+    - endpoints: [ "leaf2:Ethernet1/1", "camara2:eth1" ]
+    - endpoints: [ "leaf2:Ethernet1/2", "host_gestion_camaras:eth1" ]
     - endpoints: [ "leaf3:Ethernet0/1", "spine1:Ethernet0/3" ]
     - endpoints: [ "leaf3:Ethernet0/2", "spine2:Ethernet0/3" ]
-    - endpoints: [ "leaf3:Ethernet0/3", "camara3:eth0" ]
-    - endpoints: [ "leaf3:Ethernet1/1", "host_gamma_knife:eth0" ]
+    - endpoints: [ "leaf3:Ethernet0/3", "camara3:eth1" ]
+    - endpoints: [ "leaf3:Ethernet1/1", "host_gamma_knife:eth1" ]
     - endpoints: [ "leaf4:Ethernet0/1", "spine1:Ethernet1/1" ]
     - endpoints: [ "leaf4:Ethernet0/2", "spine2:Ethernet1/1" ]
-    - endpoints: [ "leaf4:Ethernet0/3", "camara4:eth0" ]
-    - endpoints: [ "leaf4:Ethernet1/1", "host_electro:eth0" ]
-    - endpoints: [ "leaf4:Ethernet1/2", "host_pruebas_medicas:eth0" ]
+    - endpoints: [ "leaf4:Ethernet0/3", "camara4:eth1" ]
+    - endpoints: [ "leaf4:Ethernet1/1", "host_electro:eth1" ]
+    - endpoints: [ "leaf4:Ethernet1/2", "host_pruebas_medicas:eth1" ]
 
     # ———— Border Leaf 1 ————
     - endpoints: [ "border-leaf1:Ethernet0/1", "spine1:Ethernet1/2" ]
@@ -299,8 +307,8 @@ topology:
     - endpoints: [ "border-leaf2:Ethernet0/3", "fw_paloalto:Ethernet1/2" ]
 
     # ———— DMZ ————
-    - endpoints: [ "web_server_dmz:eth0", "border-leaf1:Ethernet1/1" ]
-    - endpoints: [ "web_server_dmz:eth1", "border-leaf2:Ethernet1/1" ]
+    - endpoints: [ "web_server_dmz:eth1", "border-leaf1:Ethernet1/1" ]
+    - endpoints: [ "web_server_dmz:eth2", "border-leaf2:Ethernet1/1" ]
 
     # ———— Internet ————
     - endpoints: [ "fw_fortinet:eth1", "border-leaf1:Ethernet1/2" ]
