@@ -77,4 +77,4 @@ Estudiante de ASIR en el centro Fomento Ocupacional - FOC | GitHub: [github.com/
 
 Proyecto de carácter educativo, no destinado a producción.
 Uso libre con fines formativos y académicos.
-**© 2025 Laura Ramos Granados  – Laolink Consulting**
+**© 2025 Laura Ramos Granados y Oleg Fernández-Llebrez Rodríguez – Laolink Consulting**
