@@ -1,0 +1,59 @@
+https://www.mermaidchart.com/play?utm_source=mermaid_live_editor&utm_medium=toggle#pako:eNqNlNuOmzAQQH_F4qHaPERaDE95C5DLSiRCJWqlLRVywEnQgh0Z0vSiSv2H_uF-SccXUEyzVXkYMXOGuRr_cApeUmfmTKfTjBWcHarjLGMI1eQbv3QzROuXjCl4qPm1OBHRofg9eLSX_VGQ8wmFXNA8PVeMtp8yR2pIa5nzWUbST5q4QFsJ3BHAPcAGUFbeJoiqtstjSg4yvlREtb90FWdIGa1oscxSg9lFD0nVcuRObI4Nx4bjEfcM9wz3Rtw33EfGwZ_crzrgoqRiqFurdyoOVMl7haeq8hHGNn5jSMtK0Cupa5lreLciJXNACak5mtcdt9ByJ7_iooMldPfjP7GOCkbqPKXiS1WoXfc21NvQw4d4vkWuO3V9e27rFfifOCzySFu5O4t-TPOnrazhSvd5C8FgcJUKbtcZBXIWpKV5STputxdtU4Ala_PyVJxNlPu9hKShgqjTqt9M3dh9_fUbjyoP5XoK0hBB7M2EeADYBt4APBv4A_BH0wlH48m1W3u_gQ0tqwJ2sYYvZBtGR0o3zXiyGW_UzGoz5CFNQ_IXVh2o5bGIew9a06IT9gKS4fuzuFDYRN6o1G_UGW2e5S-7ee4H_Pg4GS9e-9wsvmy-_-sI0m44ecNZNVNcDKV_vT07Ooy-gxBcZXBJoHdwE0jhSeGDCJQR_rbeFf-va6yD6jMMIAqk2KYgQ9e46GChjAO7VtIQTxMZfLUxNl_bZK5FDCIxIDCpkjkYl7veiP82gmJqgvFq03KnTOtFxpyffwD2M7_I
+
+---
+config:
+  layout: elk
+---
+flowchart LR
+ subgraph Core_Spines["Core Spines"]
+        SP1["spine1"]
+        SP2["spine2"]
+  end
+ subgraph Dist_Leafs["Distribution Leafs"]
+        L1["leaf1 (Piso 1)"]
+        L2["leaf2 (Piso 2)"]
+        L3["leaf3 (Piso 3)"]
+        L4["leaf4 (Piso 4)"]
+  end
+ subgraph Border_Leafs["Border Leafs"]
+        BL1["border-leaf1"]
+        BL2["border-leaf2"]
+  end
+ subgraph Firewalls["Firewalls"]
+        PA["Palo Alto"]
+        FT["Fortinet"]
+  end
+ subgraph Internal_Services["Internal Services (VLAN 11-14)"]
+        HG["host_gestion"]
+        WS_INT["web_server_interno"]
+        DB["base_datos"]
+        DNS["dns_dhcp_server"]
+  end
+ subgraph Cameras["Cameras (VLAN 21–24)"]
+        C1["camara1"]
+        C2["camara2"]
+        C3["camara3"]
+        C4["camara4"]
+        HGC["host_gestion_camaras"]
+  end
+ subgraph Medical_Hosts["Medical Hosts (VLAN 31–34)"]
+        GM["host_gamma_knife"]
+        EL["host_electro"]
+        PM["host_pruebas_medicas"]
+  end
+ subgraph DMZ["DMZ (VLAN 200)"]
+        WS_DMZ["web_server_dmz"]
+  end
+ subgraph Internet["Internet"]
+        HE["host_externo"]
+  end
+    SP1 --- L1 & L2 & L3 & L4 & BL1 & BL2
+    SP2 --- L1 & L2 & L3 & L4 & BL1 & BL2
+    L1 --- WS_INT & DB & DNS & C1
+    L2 --- C2 & HGC & HG
+    L3 --- C3 & GM
+    L4 --- C4 & EL & PM
+    BL1 --- PA & FT
+    BL2 --- PA & FT
+    PA --- WS_DMZ
+    FT --- HE
