@@ -1,4 +1,4 @@
-## 🏥 Proyecto de Topología de Red: Centro de Salud "San Olegario"
+## 🏥 Proyecto de Topología de Red: Centro de Salud "San Vergeles"
 
 ### 🔧 Arquitectura Spine-Leaf con segmentación funcional y seguridad perimetral
 
@@ -18,10 +18,9 @@ Objetivos:
 * 📡   **Topología Spine-Leaf** con 2 nodos *spine* y 4 nodos *leaf*, más *border-leafs* conectados a firewalls.
 * 🌐 **Segmentación por VLANs** para zonas funcionales críticas:
 
-  * VLAN 10 – Administración y soporte técnico
-  * VLAN 20 – Servicios clínicos (DNS, DHCP, BBDD)
-  * VLAN 30 – Videovigilancia (cámaras IP)
-  * VLAN 40 – Equipos médicos especializados
+  * VLAN 10 – Administración y soporte técnico incluye DNN, DHCP, BBDD
+  * VLAN 20 – Videovigilancia (cámaras IP)
+  * VLAN 30 – Equipos médicos especializados
   * VLAN 200 – Zona DMZ para servicios expuestos
 * 🧱🔐 **Doble firewall en serie**:
 
